@@ -1,77 +1,57 @@
 package vtb.skripova;
-class Warehouse {
-    int number, location;
-
-    Warehouse(int number, int location) {
-        this.number = number;
-        this.location = location;
-    }
-
-    void store(){
-         System.out.printf("Sklad hranenie number: %d, location: %d \n", this.number, this.location);
-     }
-    void put(){
-        System.out.printf("Sklad novij tovar number: %d, location: %d \n", this.number, this.location);
-    }
-    void take(){
-        System.out.printf("Sklad tovar izjat number: %d, location: %d \n", this.number, this.location);
-    }
-    void work(){
-        System.out.printf("Sotrudnik sklada number: %d, location: %d \n", this.number, this.location);
-    }
-}
-
-class Employee extends Warehouse{
-    int age, id;
-
-    Employee(int number, int location, int age, int id){
-        super(number,location);
-        this.age=age;
-        this.id=id;
-    }
-
-    void work(){
-        System.out.printf("Sotrudnik sklada location: %d, number: %d, age: %d, id: %d \n", this.number, this.location, this.age, this.id);
-    }
-   }
-
-class Product extends Warehouse{
-    int place;
-    int article;
-
-    Product(int number, int location, int place, int article){
-        super(number,location);
-        this.article=article;
-        this.place=place;
-    }
-
-    void store(){
-        System.out.printf("Tovar hranenie number: %d, location: %d, place: %d, article: %d \n", this.number, this.location, this.place, this. article);
-    }
-    void put(){
-        System.out.printf("Tovar novij number: %d, location: %d, place: %d, article: %d \n", this.number, this.location, this.place, this. article);
-    }
-    void take(){
-        System.out.printf("Tovar izjat number: %d, location: %d, place: %d, article: %d \n", this.number, this.location, this.place, this. article);
-    }
-}
-
 
 public class Main {
 
     public static void main(String[] args) {
 
-    Warehouse w[]=new Warehouse[3];
+        Warehouse w[] = new Warehouse[2];
+        w[0] = new Warehouse(1, "Москва");
+        w[1] = new Warehouse(2, "Воронеж");
 
-    w[0]=new Warehouse(1,23);
-    w[1]=new Employee(1,23,18,444555);
-    w[2]=new Product(1,23,41,125478);
+        Employee employee[] = new Employee[3];
+        employee[0] = new Employee(1, "Москва", "Вася", 25);
+        employee[1] = new Employee(1, "Москва", "Петя", 31);
+        employee[2] = new Employee(2, "Воронеж", "Петя", 31);
 
-    for(int i=0; i<w.length; i++) {
-        w[i].store();
-        w[i].put();
-        w[i].take();
-        w[i].work();
-    }
+
+        Product productAvailable[]=new Product[2];
+        productAvailable[0]=new Product(2,"Воронеж", 2, "телевизор");
+        productAvailable[1]=new Product(2,"Воронеж", 12, "наушники");
+
+        Product productNew[]=new Product[2];
+        productNew[0]=new Product(1,"Москва", 23, "телевизор");
+        productNew[1]=new Product(1,"Москва", 57, "игровая приставка");
+
+        Product productTake[]=new Product[1];
+        productTake[0]=new Product(2,"Воронеж", 18, "планшет");
+
+        System.out.println("Список складов");
+        for (int i = 0; i < w.length; i++) {
+            w[i].adress();
+        }
+        System.out.println("");
+
+        System.out.println("Список сотрудников");
+        for (int i = 0; i < employee.length; i++) {
+            employee[i].work();
+        }
+        System.out.println("");
+
+        System.out.println("Товар в наличии");
+        for (int i = 0; i < productAvailable.length; i++) {
+            productAvailable[i].store();
+        }
+        System.out.println("");
+
+        System.out.println("Поступление нового товара");
+        for (int i = 0; i < productNew.length; i++) {
+            productNew[i].put();
+        }
+        System.out.println("");
+
+        System.out.println("Отгрузка товара со склада");
+        for (int i = 0; i < productTake.length; i++) {
+            productTake[i].take();
+        }
     }
 }
